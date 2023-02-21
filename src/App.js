@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { GlobalStyle } from "./assets/styles/Global.styles";
+import { Admin } from "./pages/Admin/Admin";
+import { Login } from "./pages/Login/Login";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App = () => {
+	const navigate = useNavigate();
+	return (
+		<>
+			<Routes>
+				<Route
+					path='/*'
+					element={localStorage.getItem("token") ? <Admin /> : navigate("/login")}
+				/>
+				<Route path='/login' element={<Login />} />
+			</Routes>
+			<GlobalStyle />
+		</>
+	);
+};
