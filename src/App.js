@@ -9,6 +9,7 @@ export const App = () => {
 	return (
 		<>
 			<Routes>
+				
 				<Route
 					path='/*'
 					element={localStorage.getItem("token") ? <Admin /> : navigate("/login")}
